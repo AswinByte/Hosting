@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #343131;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #d2d2d2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            opacity: 0;  
+            transform: scale(0.8); /* Start small */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            font-weight: bold;
+            color: #e63946;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: black;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            margin-left: 40px;
+        }
+        .input-group input {
+            width: 70%;
+            margin-left: 40px;
+            padding: 10px;
+            border: 1px solid #ff6600;
+            border-radius: 5px;
+            background-color: #ccc;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
+            font-size: 14px;
+            color: black;
+        }
+        .signup-btn {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            background: #343131;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-btn:hover {
+            background: black;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+           color: #ff6600;
+        }
+    </style>
+    <script>
+        function showSignup() {
+            let container = document.querySelector(".container");
+            container.style.opacity = "1";
+            container.style.transform = "scale(1)";
+        }
+
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var toggleText = document.getElementById("toggleText");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleText.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleText.textContent = "Show";
+            }
+        }
+
+        function closeSignup() {
+            let container = document.querySelector(".container");
+            container.style.opacity = "0";  // Fade-out effect
+            container.style.transform = "scale(0.8)"; // Shrink effect
+            setTimeout(() => {
+                window.location.href = "homepage.html"; // Redirect after fade-out
+            }, 500);
+        }
+
+        function redirectToHomepage(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            let container = document.querySelector(".container");
+            container.style.opacity = "0";
+            container.style.transform = "scale(0.8)";
+
+            setTimeout(() => {
+                window.location.href = "homepage.html"; // Redirect to homepage
+            }, 500);
+        }
+
+        // Run animation when the page loads
+        window.onload = showSignup;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <span class="close-btn" onclick="closeSignup()">×</span> <!-- Close button -->
+        <h2>Sign Up</h2>
+        <form onsubmit="redirectToHomepage(event)">
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password" required>
+                <span class="toggle-password" id="toggleText" onclick="togglePassword()">Show</span>
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="signin.html">Login</a></p>
+    </div>
+</body>
+</html>
