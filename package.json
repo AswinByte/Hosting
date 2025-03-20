@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/AswinByte/Hosting#readme",
   "dependencies": {
+    "@libsql/client": "^0.15.0",
     "better-sqlite3": "^11.9.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
