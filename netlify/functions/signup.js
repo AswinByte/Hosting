@@ -1,4 +1,4 @@
-const { createClient } = require("@turso/client");
+const { createClient } = require("turso");
 require("dotenv").config();
 
 exports.handler = async (event) => {
@@ -10,16 +10,10 @@ exports.handler = async (event) => {
         const { name, email, password } = JSON.parse(event.body);
 
         // Connect to Turso database
-        const client = createClient({ 
-            url: process.env.TURSO_DB_URL, 
-            authToken: process.env.TURSO_AUTH_TOKEN 
-        });
+        const client = createClient(process.env.TURSO_DB_URL, process.env.TURSO_AUTH_TOKEN);
 
         // Insert user data into Turso database
-        await client.execute({
-            sql: "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-            args: [name, email, password]
-        });
+        await client.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, password]);
 
         return {
             statusCode: 200,
