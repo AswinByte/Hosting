@@ -26,3 +26,17 @@ exports.handler = async (event) => {
         };
     }
 };
+
+exports.handler = async (event) => {
+    console.log("HTTP Method:", event.httpMethod); // ✅ Debugging message
+
+    if (event.httpMethod !== "POST") {
+        return { statusCode: 405, body: JSON.stringify({ message: "Method Not Allowed. Use POST." }) };
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "Signup function is working!" }),
+    };
+};
+
